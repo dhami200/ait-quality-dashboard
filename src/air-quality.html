@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Quality Dashboard</title>
+  <link rel="stylesheet" href="css/air-quality.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="aq-header">
+    <h1>🌬️ Air Quality Dashboard</h1>
+    <div class="header-right">
+      <a href="index.html" class="back-link">← Back to Quiz App</a>
+      <button id="theme-toggle-aq" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <!-- ── Main ─────────────────────────────────────────────────────────────── -->
+  <main class="aq-main">
+
+    <!-- 1. Search / GPS ─────────────────────────────────────────────────── -->
+    <section class="search-section card">
+      <h2>Find your location</h2>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Type your city or village name…"
+          aria-label="City or village name"
+          autocomplete="off"
+        >
+        <button id="search-btn" class="btn btn-primary">🔍 Search</button>
+        <button id="gps-btn"    class="btn btn-secondary">📍 Use My Location</button>
+      </div>
+      <p id="location-display"></p>
+    </section>
+
+    <!-- 2 + 3. AQI & Pollutants ─────────────────────────────────────────── -->
+    <div class="top-row">
+
+      <!-- AQI -->
+      <div class="card aqi-card">
+        <p class="aqi-label">Air Quality Index</p>
+        <div class="aqi-circle aqi-good" id="aqi-circle">
+          <span class="aqi-number" id="aqi-number">—</span>
+          <span class="aqi-unit">AQI</span>
+        </div>
+        <p class="aqi-category" id="aqi-category">—</p>
+        <p class="aqi-description" id="aqi-description"></p>
+      </div>
+
+      <!-- Pollutants -->
+      <div class="card pollutants-card">
+        <h3>Pollutant Levels</h3>
+        <div class="pollutants-grid" id="pollutants-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4 + 5. Map & Trend ──────────────────────────────────────────────── -->
+    <div class="bottom-row">
+
+      <!-- Neighbourhood map -->
+      <div class="card map-card">
+        <h3>Neighbourhood Map</h3>
+        <div class="map-wrapper">
+          <svg id="neighborhood-map" viewBox="0 0 200 200" role="img" aria-label="Neighbourhood air quality map">
+            <!-- Populated by JS -->
+          </svg>
+          <div class="map-tooltip" id="map-tooltip"></div>
+        </div>
+        <div class="map-legend" id="map-legend">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 30-day trend -->
+      <div class="card trend-card">
+        <h3>30-Day AQI Trend</h3>
+        <canvas id="trend-canvas" aria-label="30-day air quality index trend chart"></canvas>
+      </div>
+
+    </div>
+
+    <!-- 6. Alerts ───────────────────────────────────────────────────────── -->
+    <div class="card alert-card">
+      <h3>🔔 Set Pollution Alert</h3>
+      <div class="alert-form">
+        <label for="alert-threshold">Notify me when AQI exceeds</label>
+        <input
+          type="number"
+          id="alert-threshold"
+          min="1"
+          max="500"
+          placeholder="e.g. 100"
+          aria-label="AQI alert threshold"
+        >
+        <button id="set-alert-btn"   class="btn btn-primary">Set Alert</button>
+        <button id="clear-alert-btn" class="btn btn-outline">Clear</button>
+      </div>
+      <p id="alert-status"></p>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <footer class="aq-footer">
+    <p>Air Quality data is simulated for demonstration purposes.</p>
+  </footer>
+
+  <!-- ── Loading Overlay ──────────────────────────────────────────────────── -->
+  <div class="loading-overlay" id="loading-overlay" role="status" aria-live="polite">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="js/air-quality.js"></script>
+</body>
+</html>
